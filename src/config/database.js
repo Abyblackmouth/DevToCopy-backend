@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-const dbUser = '4br4h4mC0v4rrub145'
-const dbPassword = '8PbyBw9iOpLuj4oK'
-
 const {
   DB_NAME,
   DB_USERNAME,
