@@ -13,6 +13,11 @@ const postSchema = new Schema({
   },
   content: {
     type: String,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
+    required: true
   }
 
 }, { timestamps: true })

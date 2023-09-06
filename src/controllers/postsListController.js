@@ -1,4 +1,5 @@
 import Post from "../models/Post"
+import User from "../models/User"
 
 export const getPosts = async ( request, response) =>{
   const posts = await Post.find({})
@@ -7,7 +8,7 @@ export const getPosts = async ( request, response) =>{
 
 export const getPostById = async ( request, response) => {
   const { id } = request.params
-  const post = await Post.findById(id)
+  const post = await Post.findById(id).populate('users')
 
   if (!post) {
     response.status(404).send("No existe el post en la base de datos")
@@ -17,13 +18,22 @@ export const getPostById = async ( request, response) => {
 
 export const createPosts = async ( request, response ) => {
   try {
-    const {tittle, date, content} = request.body
+    const {tittle, date, content, userId} = request.body
+
+    const user = await User.findById(userId)
+    console.log(user)
+
     const newPost = new Post ({
       tittle,
       date,
-      content
+      content,
+      user,
     })
-    await newPost.save()
+
+    const post = await newPost.save()
+    user.posts.push(post)
+
+    await user.save({ validateBeforeSave: false })
     response.status(201).send(newPost)
 
     } catch (error) {

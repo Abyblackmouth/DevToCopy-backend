@@ -7,7 +7,7 @@ export const getUsers = async ( request, response) =>{
 
 export const getUserById = async ( request, response) => {
   const { id } = request.params
-  const user = await User.findById(id)
+  const user = await User.findById(id).populate('posts')
 
     if (!user) {
       response.status(404).send("No existe el usuario en la base de datos")
