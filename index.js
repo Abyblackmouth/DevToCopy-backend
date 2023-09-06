@@ -2,6 +2,7 @@ import express from "express";
 import {} from "dotenv/config"
 import todoPostRouter from "./src/routes/todoPostRouter";
 import todoUserRouter from "./src/routes/todoUserRouter";
+import registerRouter from "./src/routes/RegisterRouter";   
 import { loggerMiddleware } from "./src/routes/logger";
 import { jsonParser, xmlParser } from "./src/middleware/bodyParser";
 import cors from "cors"
@@ -13,7 +14,7 @@ const port = 3000
 DBConn()
 
 app.use(jsonParser, xmlParser, loggerMiddleware, cors())
-app.use(todoPostRouter, todoUserRouter)
+app.use(todoPostRouter, todoUserRouter, registerRouter)
 
 app.listen(port, ()=> {
     console.log(`Aplicacion escuchando por el puerto ${port}`)
