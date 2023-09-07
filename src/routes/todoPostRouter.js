@@ -11,5 +11,10 @@ todoPostRouter.route('/posts/:id')
   .get(getPostById)
   .put(updatePostById)
   .delete(deletePostById)
+/* 
+  todoPostRouter.route('/posts/:id/comments')
+  .get(getPostById)
+  .put(updatePostById)
+  .delete(deletePostById)  */
 
 export default todoPostRouter
