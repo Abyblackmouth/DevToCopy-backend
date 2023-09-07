@@ -16,12 +16,14 @@ export const createSession = async (request, response) => {
 
     if (!user) {
       response.status(404).send({ error: "Usuario no existe" })
+      return
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password)
       
       if (!passwordMatch) {
         response.status(422).send({ error: "usuario y/o contrasena invalidas" })
+        return
       }
 
       const accessToken = await jwt.sign({ user: user._id, email: user.email}, JWT_SECRET, { expiresIn: '1h'})
