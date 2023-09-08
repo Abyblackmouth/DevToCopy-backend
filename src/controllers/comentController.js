@@ -2,9 +2,9 @@ import Coment from "../models/Coments";
 import Post from "../models/Post";
 import User from "../models/User";
 
-export const getComents = async ( request, response ) => {
+export const getComentsById = async ( request, response ) => {
     const { id } = request.params
-    const coments = await Coment.findById(id).populate("posts")
+    const coments = await Coment.findById(id)
     if (!coments) {
         response.status(404).send({ message: "Us, no existen comentarios aun, Se el primero"})
         return
@@ -15,7 +15,7 @@ export const getComents = async ( request, response ) => {
 
 export const createComents = async ( request, response ) => {
     try {
-        const {comentario, postId} = request.body
+      const {comentario, postId} = request.body
   
       const post = await Post.findById(postId)
       console.log(postId)
@@ -23,12 +23,12 @@ export const createComents = async ( request, response ) => {
   
       const newComent = new Coment ({
         comentario,
-        post,
+        post
       })
       
   
       const comentSave = await newComent.save()
-      post.push(comentSave)
+      post.coments.push(comentSave)
   
       await post.save({ validateBeforeSave: false })
       response.status(201).send(newComent)

@@ -6,7 +6,7 @@ const comentsSchema = new Schema({
     comentario: {
         type: String
     }, 
-    postsId: {
+    post: {
         type: Schema.Types.ObjectId,
         ref: 'posts',
         required: true

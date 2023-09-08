@@ -1,5 +1,6 @@
 import Post from "../models/Post"
 import User from "../models/User"
+import Coment from "../models/Coments"
 
 export const getPosts = async ( request, response) =>{
   const posts = await Post.find({})
