@@ -12,3 +12,28 @@ export const getComents = async ( request, response ) => {
     response.status(200).send(coments)
 
 }
+
+export const createComents = async ( request, response ) => {
+    try {
+        const {comentario, postId} = request.body
+  
+      const post = await Post.findById(postId)
+      console.log(postId)
+      console.log(post)
+  
+      const newComent = new Coment ({
+        comentario,
+        post,
+      })
+      
+  
+      const comentSave = await newComent.save()
+      post.push(comentSave)
+  
+      await post.save({ validateBeforeSave: false })
+      response.status(201).send(newComent)
+  
+      } catch (error) {
+        response.status(422).send({ error: error.message })
+    }
+  }

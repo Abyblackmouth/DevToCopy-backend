@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose
 
 const comentsSchema = new Schema({
-    coment: {
+    comentario: {
         type: String
     }, 
-    user: {
+    postsId: {
         type: Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'posts',
         required: true
-      },
+      }
 },{ timestamps: true } )
 
 const Coment = model("coments", comentsSchema)
