@@ -10,6 +10,7 @@ comentRouter.route("/posts/:id/coments")
 comentRouter.route("/coments")
 /* .get(getComents) */
     .post(createComents)
+    .get(getComents)
 
     
 

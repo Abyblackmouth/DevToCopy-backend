@@ -3,13 +3,13 @@ import User from "../models/User"
 import Coment from "../models/Coments"
 
 export const getPosts = async ( request, response) =>{
-  const posts = await Post.find({})
+  const posts = await Post.find({}).populate("user")
   response.send(posts)
 }
 
 export const getPostById = async ( request, response) => {
   const { id } = request.params
-  const post = await Post.findById(id).populate('users')
+  const post = await Post.findById(id).populate("user").populate('coments')
 
   if (!post) {
     response.status(404).send("No existe el post en la base de datos")

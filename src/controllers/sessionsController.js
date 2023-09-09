@@ -6,7 +6,7 @@ const { JWT_SECRET } = process.env
 
 export const createSession = async (request, response) => {
 
-  const { email, password } = request.body
+  const { email, password } = JSON.parse(request.body)
   console.log(request.body)
 
   try {
