@@ -3,7 +3,7 @@ import User from "../models/User"
 
 export const register = async (request, response) =>{
 
-    const {name, lastName, email, user, password} = request.body
+    const {name, lastName, email, user, password, avatar} = request.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -12,6 +12,7 @@ export const register = async (request, response) =>{
         lastName,
         email,
         user,
+        avatar,
         password: hashedPassword
     })
     await newUser.save()

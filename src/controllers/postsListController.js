@@ -19,7 +19,7 @@ export const getPostById = async ( request, response) => {
 
 export const createPosts = async ( request, response ) => {
   try {
-    const {tittle, date, content, userId} = request.body
+    const {tittle, date, content, image, userId} = request.body
 
     const user = await User.findById(userId)
     console.log(user)
@@ -28,6 +28,7 @@ export const createPosts = async ( request, response ) => {
       tittle,
       date,
       content,
+      image,
       user,
     })
 
@@ -47,7 +48,7 @@ export const updatePostById = async ( request, response ) => {
   const { tittle, date, content } = request.body
   const post = await Post.findOneAndUpdate(
     {_id: id}, 
-    { tittle, date, content},
+    { tittle, date, content, image},
     {returnOriginal: false})
   response.send({message: 'Se actualizo el usuario' , data: post}) 
 }
